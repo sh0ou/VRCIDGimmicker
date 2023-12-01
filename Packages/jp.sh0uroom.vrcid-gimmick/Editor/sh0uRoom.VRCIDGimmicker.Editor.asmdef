@@ -1,0 +1,19 @@
+{
+    "name": "sh0uRoom.VRCIDGimmicker.Editor",
+    "references": [
+        "GUID:84265b35cca3905448e623ef3903f0ff",
+        "GUID:61a524bf2b4f2c944b8d1df163675ca5",
+        "GUID:99835874ee819da44948776e0df4ff1d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
