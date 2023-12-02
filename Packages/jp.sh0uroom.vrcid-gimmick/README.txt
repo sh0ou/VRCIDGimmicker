@@ -1,9 +1,17 @@
 *==========*==========*
-VRCID Gimmicker v1.0.1
+VRCID Gimmicker v1.0.2
 *==========*==========*
+
 Author: sh0u
 Twitter: https://twitter.com/sh0ou
 Discord: sh0ou
+
+当ツールは「MIT License」を適用しています。
+改変したツールを配布する際、同梱の「LICENSE.txt」も同梱して配布してください。
+
+可能であればワールド上に以下のクレジットを記載してください。作者が喜びます。
+
+VRCID Gimmicker (c) 2023 sh0u
 
 *==========*==========*
 

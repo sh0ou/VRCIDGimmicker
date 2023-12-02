@@ -1,0 +1,12 @@
+各種不具合報告はGithub上のIssue機能で受け付けています。
+https://github.com/sh0ou/VRCIDGimmicker/issues
+
+v1.0.0
+初期版
+
+v1.0.1
+UserIDLoaderで、TextUIが指定されてない時にエラーが出る不具合を修正
+
+v1.0.2（ギミック変更なし）
+ライセンスファイルを同梱
+READMEにクレジットのお願いを記載
