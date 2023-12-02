@@ -92,6 +92,8 @@ namespace sh0uRoom.VRCIDGimmick
 
         private void OutputIDText(string[] strs)
         {
+            if(textUI == null) return;
+
             textUI.text = "";
             //IDごとに改行
             foreach (var id in strs)

@@ -1,7 +1,7 @@
 {
   "name": "jp.sh0uroom.vrcid-gimmick",
   "displayName": "VRCID Gimmicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of gimmick tools that work only for specific users.",
   "gitDependencies": {},
   "vpmDependencies": {

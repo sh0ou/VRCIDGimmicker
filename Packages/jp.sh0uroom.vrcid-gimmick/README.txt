@@ -1,5 +1,5 @@
 *==========*==========*
-VRCID Gimmicker v1.0.0
+VRCID Gimmicker v1.0.1
 *==========*==========*
 Author: sh0u
 Twitter: https://twitter.com/sh0ou
