@@ -8,7 +8,9 @@ namespace sh0uRoom.VRCIDGimmick
     public class VerifyUserTeleporter : UdonSharpBehaviour
     {
         [SerializeField] private UserIDLoader loader;
+        [SerializeField] private bool isBlackList;
         [SerializeField] private Transform teleportPos;
+        [SerializeField] private bool isTeleportOnStart;
         private const string DEBUG_PREFIX_ERR = "[<color=magenta>VerifyUserTeleporter</color>]";
 
         private void Start()
@@ -17,11 +19,6 @@ namespace sh0uRoom.VRCIDGimmick
             {
                 enabled = false;
                 return;
-            }
-
-            if (isTeleportOnStart)
-            {
-                Teleport();
             }
         }
 
@@ -48,6 +45,14 @@ namespace sh0uRoom.VRCIDGimmick
             if (loader.CheckUserIDValid(isBlackList))
             {
                 Teleport();
+            }
+        }
+
+        public override void OnPlayerJoined(VRCPlayerApi player)
+        {
+            if (isTeleportOnStart && player.isLocal)
+            {
+                SendCustomEventDelayedFrames(nameof(Teleport), 5);
             }
         }
         #endregion
