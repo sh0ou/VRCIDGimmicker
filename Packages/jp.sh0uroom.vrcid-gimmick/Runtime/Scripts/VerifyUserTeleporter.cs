@@ -50,7 +50,7 @@ namespace sh0uRoom.VRCIDGimmick
 
         public override void OnPlayerJoined(VRCPlayerApi player)
         {
-            if (isTeleportOnStart && player.isLocal)
+            if (isTeleportOnStart && player.isLocal && loader.CheckUserIDValid(isBlackList))
             {
                 SendCustomEventDelayedFrames(nameof(Teleport), 5);
             }

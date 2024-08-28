@@ -15,3 +15,6 @@ v1.1.0
 UserIDLoaderのテキスト出力について、複数のTextMeshProUGUIへの出力に対応
 UserTeleporterで、自動テレポートが動作しない不具合を修正
 その他コードの整理
+
+v1.1.1
+UserTeleporterで、自動テレポートが全プレイヤーに作動してしまう不具合を修正
