@@ -78,3 +78,4 @@ crashlytics-build.properties
 Packages/vpm-manifest.json
 Packages/packages-lock.json
 Packages/manifest.json
+/.vscode
