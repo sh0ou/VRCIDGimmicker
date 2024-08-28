@@ -33,14 +33,7 @@ namespace sh0uRoom.VRCIDGimmick
 
             RequestSerialization();
 
-            if (isActiveObj)
-            {
-                targetObj.SetActive(true);
-            }
-            else
-            {
-                targetObj.SetActive(false);
-            }
+            targetObj.SetActive(isActiveObj);
         }
 
         private bool CheckNull()

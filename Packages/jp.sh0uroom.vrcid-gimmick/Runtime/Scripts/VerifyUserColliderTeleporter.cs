@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.SDKBase.Editor.Attributes;
 
 namespace sh0uRoom.VRCIDGimmick
 {

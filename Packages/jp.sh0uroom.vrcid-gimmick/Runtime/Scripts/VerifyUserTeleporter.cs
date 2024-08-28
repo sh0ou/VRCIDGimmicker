@@ -8,9 +8,7 @@ namespace sh0uRoom.VRCIDGimmick
     public class VerifyUserTeleporter : UdonSharpBehaviour
     {
         [SerializeField] private UserIDLoader loader;
-        [SerializeField] private bool isBlackList = false;
         [SerializeField] private Transform teleportPos;
-        [SerializeField] private bool isTeleportOnStart = false;
         private const string DEBUG_PREFIX_ERR = "[<color=magenta>VerifyUserTeleporter</color>]";
 
         private void Start()
