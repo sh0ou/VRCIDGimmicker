@@ -1,10 +1,10 @@
 *==========*==========*
-VRCID Gimmicker v1.0.2
+VRCID Gimmicker
 *==========*==========*
 
 Author: sh0u
 Twitter: https://twitter.com/sh0ou
-Discord: sh0ou
+E-mail: contact@sh0u.jp
 
 当ツールは「MIT License」を適用しています。
 改変したツールを配布する際、同梱の「LICENSE.txt」も同梱して配布してください。

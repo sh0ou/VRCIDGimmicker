@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.SDKBase.Editor.Attributes;
 
 namespace sh0uRoom.VRCIDGimmick
 {
@@ -18,6 +17,8 @@ namespace sh0uRoom.VRCIDGimmick
         [SerializeField] private bool isWhiteList = false;
 
         private VRCPlayerApi player;
+        private const string DEBUG_PREFIX_ERR = "[<color=magenta>VerifyUserColliderTeleporter</color>]";
+        private const string DEBUG_PREFIX_WARN = "[<color=yellow>VerifyUserColliderTeleporter</color>]";
 
         private void Start()
         {
@@ -30,19 +31,19 @@ namespace sh0uRoom.VRCIDGimmick
         {
             if (targetColliders.Length == 0 || teleportPos == null)
             {
-                Debug.LogError($"[<color=magenta>{nameof(VerifyUserColliderTeleporter)}</color>]対象のコライダー、テレポート先が設定されていません");
+                Debug.LogError($"{DEBUG_PREFIX_ERR}対象のコライダー、テレポート先が設定されていません");
                 return false;
             }
             if (loader == null)
             {
-                Debug.LogWarning($"[<color=yellow>{nameof(VerifyUserColliderTeleporter)}</color>]{nameof(UserIDLoader)}が設定されてません。全てのプレイヤーが対象になります");
+                Debug.LogWarning($"{DEBUG_PREFIX_WARN}{nameof(UserIDLoader)}が設定されてません。全てのプレイヤーが対象になります");
                 return false;
             }
             foreach (var collider in targetColliders)
             {
                 if (!collider.isTrigger)
                 {
-                    Debug.LogWarning($"[<color=yellow>{nameof(VerifyUserColliderTeleporter)}</color>]{collider.name}のisTriggerにチェックをつけてください");
+                    Debug.LogWarning($"{DEBUG_PREFIX_WARN}{collider.name}のisTriggerにチェックをつけてください");
                     return false;
                 }
             }

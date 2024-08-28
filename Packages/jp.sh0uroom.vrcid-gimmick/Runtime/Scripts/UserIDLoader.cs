@@ -20,8 +20,11 @@ namespace sh0uRoom.VRCIDGimmick
         [UdonSynced, SerializeField] private VRCUrl targetURL;
         [SerializeField] private bool isInputURL;
         [SerializeField] private bool isOutputLog = false;
-        [SerializeField] private TextMeshProUGUI textUI;
+        [SerializeField] private TextMeshProUGUI[] textUIs;
         private string outputText = "";
+
+        private const string DEBUG_PREFIX = "[<color=#73ff9a>UserIDLoader</color>]";
+        private const string DEBUG_PREFIX_ERR = "[<color=magenta>UserIDLoader</color>]";
 
         private void Start()
         {
@@ -43,7 +46,7 @@ namespace sh0uRoom.VRCIDGimmick
                 if (!string.IsNullOrEmpty(outputText))
                 {
                     ConvertStringToArray(outputText);
-                    Debug.Log($"[<color=#73ff9a>{nameof(UserIDLoader)}</color>]データ取得完了");
+                    Debug.Log($"{DEBUG_PREFIX}データ取得完了");
                     isURLLoaded = true;
                 }
             }
@@ -71,17 +74,17 @@ namespace sh0uRoom.VRCIDGimmick
             var url = targetURL.Get();
             if (url.StartsWith("https://") == false)
             {
-                Debug.LogError($"[<color=magenta>{nameof(UserIDLoader)}</color>]httpsで始まるURLではありません - {gameObject.name}");
+                Debug.LogError($"{DEBUG_PREFIX_ERR}httpsで始まるURLではありません - {gameObject.name}");
                 return;
             }
             else if (url.EndsWith(".txt") == false)
             {
-                Debug.LogError($"[<color=magenta>{nameof(UserIDLoader)}</color>]txtファイルではありません - {gameObject.name}");
+                Debug.LogError($"{DEBUG_PREFIX_ERR}txtファイルではありません - {gameObject.name}");
                 return;
             }
 
             VRCStringDownloader.LoadUrl(targetURL, (IUdonEventReceiver)this);
-            Debug.Log($"[<color=#73ff9a>{nameof(UserIDLoader)}</color>]Loading...");
+            Debug.Log($"{DEBUG_PREFIX}Loading...");
         }
 
         /// <summary>
@@ -92,13 +95,18 @@ namespace sh0uRoom.VRCIDGimmick
 
         private void OutputIDText(string[] strs)
         {
-            if(textUI == null) return;
+            if (textUIs == null) return;
 
-            textUI.text = "";
+            var str = "";
             //IDごとに改行
             foreach (var id in strs)
             {
-                textUI.text += id + "\n";
+                str += id + "\n";
+            }
+
+            foreach (var textUI in textUIs)
+            {
+                textUI.text = str;
             }
         }
 
@@ -120,21 +128,21 @@ namespace sh0uRoom.VRCIDGimmick
             // HTMLタグが含まれていたらエラー
             if (outputText.Contains("<!DOCTYPE html>"))
             {
-                Debug.LogError($"[<color=magenta>{nameof(UserIDLoader)}</color>]HTMLタグを検出しました。サイト上にエラーが発生しているか、間違ったURLを指定している可能性があります。 - {gameObject.name}");
+                Debug.LogError($"{DEBUG_PREFIX_ERR}HTMLタグを検出しました。サイト上にエラーが発生しているか、間違ったURLを指定している可能性があります。 - {gameObject.name}");
                 return;
             }
 
-            Debug.Log($"[<color=73ff9a>{nameof(UserIDLoader)}</color>]Complete");
+            Debug.Log($"{DEBUG_PREFIX}Complete");
 
             // 結果出力
             ConvertStringToArray(outputText = result.Result);
             // ログ出力
             if (isOutputLog)
             {
-                Debug.Log($"[<color=#73ff9a>{nameof(UserIDLoader)}</color>]取得内容: {result.Result} - {gameObject.name}");
+                Debug.Log($"{DEBUG_PREFIX}取得内容: {result.Result} - {gameObject.name}");
             }
             // Textに出力
-            if (textUI != null)
+            if (textUIs != null)
             {
                 var str = result.Result.Split(',');
                 OutputIDText(str);
@@ -143,7 +151,7 @@ namespace sh0uRoom.VRCIDGimmick
 
         public override void OnStringLoadError(IVRCStringDownload result)
         {
-            Debug.Log($"[<color=magenta>{nameof(UserIDLoader)}</color>]{result.ErrorCode}({result.Error}) - {gameObject.name}");
+            Debug.LogError($"{DEBUG_PREFIX_ERR}{result.ErrorCode}({result.Error}) - {gameObject.name}");
         }
         #endregion
     }

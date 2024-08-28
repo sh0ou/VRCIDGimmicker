@@ -16,6 +16,7 @@ namespace sh0uRoom.VRCIDGimmick
 
         [UdonSynced] private bool isActivated = false;
         [UdonSynced] private bool isActiveObj = false;
+        private const string DEBUG_PREFIX_ERR = "[<color=magenta>VerifyUserObjSwitcher</color>]";
 
         void Start()
         {
@@ -32,26 +33,19 @@ namespace sh0uRoom.VRCIDGimmick
 
             RequestSerialization();
 
-            if (isActiveObj)
-            {
-                targetObj.SetActive(true);
-            }
-            else
-            {
-                targetObj.SetActive(false);
-            }
+            targetObj.SetActive(isActiveObj);
         }
 
         private bool CheckNull()
         {
             if (loader == null)
             {
-                Debug.LogError($"[<color=magenta>{nameof(VerifyUserObjSwitcher)}</color>]{nameof(UserIDLoader)}が設定されていません - {gameObject.name}");
+                Debug.LogError($"{DEBUG_PREFIX_ERR}{nameof(UserIDLoader)}が設定されていません - {gameObject.name}");
                 return false;
             }
             if (targetObj == null)
             {
-                Debug.LogError($"[<color=magenta>{nameof(VerifyUserObjSwitcher)}</color>]対象オブジェクトが設定されていません - {gameObject.name}");
+                Debug.LogError($"{DEBUG_PREFIX_ERR}対象オブジェクトが設定されていません - {gameObject.name}");
                 return false;
             }
             return true;
@@ -72,7 +66,7 @@ namespace sh0uRoom.VRCIDGimmick
                     RequestSerialization();
                     isActiveObj = !isActiveObj;
                     isActivated = true;
-                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Activate");
+                    SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(Activate));
                 }
                 else
                 {
