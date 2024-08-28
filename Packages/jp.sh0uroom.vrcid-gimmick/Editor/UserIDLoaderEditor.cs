@@ -12,7 +12,7 @@ namespace sh0uRoom.VRCIDGimmick
         private SerializedProperty isInputURL;
         private SerializedProperty targetURL;
         private SerializedProperty isOutputLog;
-        private SerializedProperty textUI;
+        private SerializedProperty textUIs;
         private SerializedProperty userIDs;
 
         public override void OnInspectorGUI()
@@ -31,7 +31,7 @@ namespace sh0uRoom.VRCIDGimmick
         {
             isInputURL = serializedObject.FindProperty("isInputURL");
             isOutputLog = serializedObject.FindProperty("isOutputLog");
-            textUI = serializedObject.FindProperty("textUI");
+            textUIs = serializedObject.FindProperty("textUIs");
 
             targetURL = serializedObject.FindProperty("targetURL");
             userIDs = serializedObject.FindProperty("userIDs");
@@ -42,7 +42,7 @@ namespace sh0uRoom.VRCIDGimmick
             //URLで指定するか、手動で指定するか選択するボタン
             EditorGUILayout.BeginHorizontal();
             {
-                EditorGUILayout.PrefixLabel("IDの設定方法");
+                EditorGUILayout.PrefixLabel("IDの指定方法");
                 if (isInputURL.boolValue)
                 {
                     if (GUILayout.Button("URLから取得する"))
@@ -71,18 +71,18 @@ namespace sh0uRoom.VRCIDGimmick
             }
 
             //Textに出力するかどうか
-            if (isOutputText || textUI.objectReferenceValue != null)
+            if (isOutputText || textUIs.arraySize > 0)
             {
                 EditorGUILayout.BeginHorizontal();
                 {
-                    EditorGUILayout.PropertyField(textUI, new GUIContent("出力先のTextMeshPro"));
-                    if (GUILayout.Button("x", GUILayout.Width(40)))
+                    if (GUILayout.Button("TextUIへの出力をやめる"))
                     {
-                        textUI.objectReferenceValue = null;
+                        textUIs.arraySize = 0;
                         isOutputText = false;
                     }
                 }
                 EditorGUILayout.EndHorizontal();
+                EditorGUILayout.PropertyField(textUIs, new GUIContent("出力先のTextMeshPro"), true);
             }
             else
             {

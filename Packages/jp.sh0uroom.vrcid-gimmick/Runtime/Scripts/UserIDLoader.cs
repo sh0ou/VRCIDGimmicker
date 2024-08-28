@@ -20,7 +20,7 @@ namespace sh0uRoom.VRCIDGimmick
         [UdonSynced, SerializeField] private VRCUrl targetURL;
         [SerializeField] private bool isInputURL;
         [SerializeField] private bool isOutputLog = false;
-        [SerializeField] private TextMeshProUGUI textUI;
+        [SerializeField] private TextMeshProUGUI[] textUIs;
         private string outputText = "";
 
         private const string DEBUG_PREFIX = "[<color=#73ff9a>UserIDLoader</color>]";
@@ -95,13 +95,18 @@ namespace sh0uRoom.VRCIDGimmick
 
         private void OutputIDText(string[] strs)
         {
-            if(textUI == null) return;
+            if (textUIs == null) return;
 
-            textUI.text = "";
+            var str = "";
             //IDごとに改行
             foreach (var id in strs)
             {
-                textUI.text += id + "\n";
+                str += id + "\n";
+            }
+
+            foreach (var textUI in textUIs)
+            {
+                textUI.text = str;
             }
         }
 
@@ -137,7 +142,7 @@ namespace sh0uRoom.VRCIDGimmick
                 Debug.Log($"{DEBUG_PREFIX}取得内容: {result.Result} - {gameObject.name}");
             }
             // Textに出力
-            if (textUI != null)
+            if (textUIs != null)
             {
                 var str = result.Result.Split(',');
                 OutputIDText(str);
