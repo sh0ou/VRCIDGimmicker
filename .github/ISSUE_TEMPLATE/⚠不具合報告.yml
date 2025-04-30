@@ -1,0 +1,44 @@
+name: ⚠不具合報告
+description: ワールドやプロジェクトに不具合が発生している場合
+title: "[Bug]: "
+labels: ["C: バグ"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        不具合報告フォームへようこそ！以下のフォームを入力して下さい。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 概要
+      description: どのような不具合が起こりましたか？
+      placeholder: 概要を記入...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現方法
+      description: 不具合の再現方法を記入してください。
+      placeholder: 再現方法を記入...
+    validations:
+      required: true
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: どのプラットフォームで発生しましたか？
+      multiple: true
+      options:
+        - Unity Editor
+        - デスクトップ
+        - PCVR
+        - Quest
+        - Android
+        - iOS
+        - その他
+  - type: textarea
+    id: logs
+    attributes:
+      label: ログがある場合入力してください。
+      description: UnityEditorの場合はConsoleタブの内容、VRChat内であれば Shift+`+3 で表示されるテキストの内容を参照してください
+      render: shell
